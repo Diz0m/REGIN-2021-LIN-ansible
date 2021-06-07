@@ -1,0 +1,35 @@
+---
+- name: Install ansible and all in L-FW
+  hosts: L-FW
+
+  vars:
+    ansible_cfg: /opt/ansible/REGION/TEST/ansible.cfg
+    ansible_hosts: /opt/ansible/REGION/TEST/hosts
+    ansible_play: /opt/ansible/REGION/TEST/playbook.yml
+  tasks:
+#    - name: install epel-release
+#      dnf: name=epel-release state=installed
+#    
+#    - name: install ansible
+#      dnf: name=ansible state=installed
+# 
+#    - name: mkdir
+#      shell: mkdir /opt/ansible
+#
+    - name: cp
+      copy: src={{ ansible_cfg }} dest=/etc/ansible/ansible.cfg
+
+    - name: cp
+      copy: src={{ ansible_hosts }} dest=/etc/ansible/hosts
+
+    - name: cp
+      copy: src={{ ansible_play }} dest=/etc/ansible/
+
+    - name: ansible start
+      shell: ansible-playbook /etc/ansible/playbook.yml
+      register: output
+
+    - debug:
+        msg: "{{ output }}"
+ 
+    - local_action: copy content={{ output.stdout }} dest=/opt/ansible/REGION/log

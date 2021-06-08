@@ -1,0 +1,49 @@
+
+option domain-name "skill39.wsr";
+option domain-name-servers 172.16.20.10;
+default-lease-time 600;
+max-lease-time 7200;
+ddns-update-style interim;
+
+ddns-updates on;
+update-static-leases on;
+ddns-domainname "skill39.wsr";
+ddns-rev-domainname "16.172.in-addr.arpa";
+ddns-rev-domainname "168.192.in-addr.arpa";
+
+zone skill39.wsr {
+	primary 172.16.20.10;
+}
+
+zone 16.172.in-addr.arpa {
+	primary 172.16.20.10;}
+
+authoritative;
+log-facility local7;
+
+
+
+subnet 172.16.100.0 netmask 255.255.255.0 {
+  range 172.16.100.65 172.16.100.75;
+  option domain-name-servers 172.16.20.10;
+  option domain-name "skill39.wsr";
+  option routers 172.16.100.1;
+  option broadcast-address 172.16.100.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+  ddns-rev-domainname "in-addr.arpa";
+}
+
+subnet 172.16.200.0 netmask 255.255.255.0 {
+  range 172.16.200.65 172.16.200.75;
+  option domain-name-servers 172.16.20.10;
+  option domain-name "skill39.wsr";
+  option routers 172.16.200.1;
+  option broadcast-address 172.16.200.255;
+  default-lease-time 600;
+  max-lease-time 7200;
+  ddns-rev-domainname "in-addr.arpa";
+}
+
+subnet 172.16.50.0 netmask 255.255.255.252{
+}

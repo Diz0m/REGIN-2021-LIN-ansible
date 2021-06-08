@@ -12,5 +12,6 @@ cd ./FW
 #ansible-playbook ipsec.yml
 # dns server
 #ansible-playbook namedl.yml
-ansible-playbook namedr.yml
-
+#ansible-playbook namedr.yml
+# dhcp-server
+ansible-playbook dhcp.yml

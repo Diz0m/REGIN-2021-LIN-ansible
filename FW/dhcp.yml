@@ -1,0 +1,27 @@
+---
+- name: dhcp install and configure
+  hosts: L-FW
+  vars:
+    mac: "{{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }}"
+    dhcp_conf: /opt/ansible/REGION/FILES/dhcpd
+    dhcp_temp: /opt/ansible/REGION/FILES/dhcp_temp.j2
+    ansible_play: /opt/ansible/REGION/TASKS/dhcpd.yml
+
+  tasks:
+    - name: copy dhcpd.conf
+      copy: src={{ dhcp_conf }} dest=/etc/ansible
+
+    - name: copy template
+      copy: src={{ dhcp_temp }} dest=/etc/ansible
+
+    - name: copy ansible playbook for install and configure dhcpd
+      copy: src={{ ansible_play }} dest=/etc/ansible/
+
+    - name: start playbook for install and configure dhcpd
+      shell: ansible-playbook /etc/ansible/dhcpd.yml
+      register: leftout
+      when: inventory_hostname == "L-FW"
+
+    - name: log about install dhcpd
+      local_action: copy content={{ leftout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/dhcpd.log
+      when: inventory_hostname == "L-FW"

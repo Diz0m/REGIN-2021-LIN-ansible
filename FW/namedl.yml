@@ -31,4 +31,4 @@
 
     - name: left log
       local_action: copy content={{ leftout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/named.log
-      when: inventory_hostname == "L-FW"    
+      when: inventory_hostname == "L-FW"

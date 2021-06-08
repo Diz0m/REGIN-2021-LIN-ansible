@@ -1,7 +1,10 @@
 ---
 - name: test
-  hosts: guacd
-  
+  hosts: test
+  vars:
+    mac: "{{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }}"
+
   tasks:
-  - name: mac
-    debug: msg="{{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }}"
+  - name: test
+    local_action: copy content={{ mac }} dest=/opt/ansible/REGION/TEST/test
+    when: inventory_hostname == "R-CLI"

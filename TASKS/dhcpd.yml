@@ -1,0 +1,42 @@
+---
+- name: dhcp install and configure
+  hosts: L-RTR-A,L-CLI-B,L-RTR-B
+  vars:
+    mac: "{{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }}"
+    dhcp_conf: /etc/ansible/dhcpd
+  tasks:
+    - name: install dhcpd
+      dnf: name=dhcp-server state=installed
+      when: inventory_hostname == "L-RTR-A"
+
+    - name: generate host_file
+      template: src=/etc/ansible/dhcp_temp.j2 dest=/opt/dhcpd
+      when: inventory_hostname == "L-RTR-A"
+
+    - name: copy dhcpd file
+      copy: src={{ dhcp_conf }} dest=/etc/dhcp/dhcpd.conf
+      when: inventory_hostname == "L-RTR-A"
+
+    - name: add host confi
+      shell: cat /opt/dhcpd >> /etc/dhcp/dhcpd.conf
+      when: inventory_hostname == "L-RTR-A"
+
+    - name: restart and enable dhcpd
+      service: name=dhcpd state=restarted enabled=yes
+      when: inventory_hostname == "L-RTR-A"
+
+    - name: install dhcp-relay
+      dnf: name=dhcp-relay state=installed
+      when: inventory_hostname == "L-RTR-B"
+
+    - name: configure dhcp-relay
+      shell: echo "sudo dhcrelay 172.16.50.2" >> /etc/rc.local
+      when: inventory_hostname == "L-RTR-B"
+
+    - name: rc.local
+      shell: chmod a+x /etc/rc.d/rc.local
+      when: inventory_hostname == "L-RTR-B"
+
+    - name: dhcrelay
+      shell: dhcrelay 172.16.50.2
+      when: inventory_hostname == "L-RTR-B"

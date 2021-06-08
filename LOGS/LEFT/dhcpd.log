@@ -1,0 +1,57 @@
+
+PLAY [dhcp install and configure] **********************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [L-RTR-A]
+ok: [L-RTR-B]
+ok: [L-CLI-B]
+
+TASK [install dhcpd] ***********************************************************
+skipping: [L-CLI-B]
+skipping: [L-RTR-B]
+ok: [L-RTR-A]
+
+TASK [generate host_file] ******************************************************
+skipping: [L-CLI-B]
+skipping: [L-RTR-B]
+ok: [L-RTR-A]
+
+TASK [copy dhcpd file] *********************************************************
+skipping: [L-CLI-B]
+skipping: [L-RTR-B]
+changed: [L-RTR-A]
+
+TASK [add host confi] **********************************************************
+skipping: [L-CLI-B]
+skipping: [L-RTR-B]
+changed: [L-RTR-A]
+
+TASK [restart and enable dhcpd] ************************************************
+skipping: [L-CLI-B]
+skipping: [L-RTR-B]
+changed: [L-RTR-A]
+
+TASK [install dhcp-relay] ******************************************************
+skipping: [L-RTR-A]
+skipping: [L-CLI-B]
+ok: [L-RTR-B]
+
+TASK [configure dhcp-relay] ****************************************************
+skipping: [L-RTR-A]
+skipping: [L-CLI-B]
+changed: [L-RTR-B]
+
+TASK [rc.local] ****************************************************************
+skipping: [L-RTR-A]
+skipping: [L-CLI-B]
+changed: [L-RTR-B]
+
+TASK [dhcrelay] ****************************************************************
+skipping: [L-RTR-A]
+skipping: [L-CLI-B]
+changed: [L-RTR-B]
+
+PLAY RECAP *********************************************************************
+L-CLI-B                    : ok=1    changed=0    unreachable=0    failed=0    skipped=9    rescued=0    ignored=0   
+L-RTR-A                    : ok=6    changed=3    unreachable=0    failed=0    skipped=4    rescued=0    ignored=0   
+L-RTR-B                    : ok=5    changed=3    unreachable=0    failed=0    skipped=5    rescued=0    ignored=0   

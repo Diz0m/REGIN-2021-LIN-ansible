@@ -1,0 +1,34 @@
+
+PLAY [ping test] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [L-RTR-A]
+ok: [L-SRV]
+ok: [L-RTR-B]
+ok: [L-FW]
+ok: [L-CLI-A]
+ok: [L-CLI-B]
+
+TASK [copy /etc/hosts] *********************************************************
+changed: [L-RTR-B]
+changed: [L-SRV]
+changed: [L-RTR-A]
+changed: [L-FW]
+changed: [L-CLI-A]
+changed: [L-CLI-B]
+
+TASK [nsswitch] ****************************************************************
+changed: [L-RTR-B]
+changed: [L-SRV]
+changed: [L-RTR-A]
+changed: [L-FW]
+changed: [L-CLI-A]
+changed: [L-CLI-B]
+
+PLAY RECAP *********************************************************************
+L-CLI-A                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-CLI-B                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-FW                       : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-RTR-A                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-RTR-B                    : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-SRV                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

@@ -1,0 +1,16 @@
+---
+- name: ping test
+  hosts: all
+  vars:
+    file_path: /etc/ansible/ipsec
+    file_path1: /etc/ansible/ipsec.secrets
+
+  tasks:
+    - name: copy /etc/hosts
+      copy: src={{ file_path }} dest=/etc/ipsec.d/vpn.conf
+
+    - name: ipsec.secrets
+      copy: src={{ file_path1 }} dest=/etc/ipsec.secrets
+
+    - name: start ipsec
+      service: name=ipsec state=restarted enabled=yes

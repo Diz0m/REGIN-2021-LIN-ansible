@@ -1,0 +1,12 @@
+---
+- name: ping test
+  hosts: all
+  vars:
+    etc_hosts: /etc/ansible/host
+
+  tasks:
+    - name: copy /etc/hosts
+      copy: src={{ etc_hosts }} dest=/etc/hosts
+
+    - name: nsswitch
+      shell: sed -i "s/files dns/dns files/g" /etc/nsswitch.conf

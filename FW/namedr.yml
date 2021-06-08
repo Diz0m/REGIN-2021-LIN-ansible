@@ -1,0 +1,22 @@
+---
+- name: Install ansible and all in L-FW
+  hosts: L-FW
+
+  vars:
+    zone_file: /opt/ansible/REGION/FILES/zoner
+    ansible_play: /opt/ansible/REGION/TASKS/namedr.yml
+  tasks:
+    - name: cp
+      copy: src={{ zone_file }} dest=/etc/ansible/
+
+    - name: cp
+      copy: src={{ ansible_play }} dest=/etc/ansible/
+
+    - name: right ansible start
+      shell: cd /etc/ansible && ansible-playbook namedr.yml
+      register: rightout
+      when: inventory_hostname == "L-FW"
+
+    - name: right log
+      local_action: copy content={{ rightout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/named.log
+      when: inventory_hostname == "L-FW"    

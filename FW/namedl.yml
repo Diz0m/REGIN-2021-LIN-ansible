@@ -1,0 +1,34 @@
+---
+- name: Install ansible and all in L-FW
+  hosts: L-FW
+
+  vars:
+    all_file: /opt/ansible/REGION/FILES/forward.db
+    zone_file: /opt/ansible/REGION/FILES/zone
+    left_file: /opt/ansible/REGION/FILES/left.db
+    right_file: /opt/ansible/REGION/FILES/right.db
+    ansible_play: /opt/ansible/REGION/TASKS/namedl.yml
+  tasks:
+    - name: cp
+      copy: src={{ all_file }} dest=/etc/ansible/
+
+    - name: cp
+      copy: src={{ zone_file }} dest=/etc/ansible/
+
+    - name: cp
+      copy: src={{ left_file }} dest=/etc/ansible/
+
+    - name: cp
+      copy: src={{ right_file }} dest=/etc/ansible/
+
+    - name: cp
+      copy: src={{ ansible_play }} dest=/etc/ansible/
+
+    - name: left ansible start
+      shell: ansible-playbook /etc/ansible/namedl.yml
+      register: leftout
+      when: inventory_hostname == "L-FW"
+
+    - name: left log
+      local_action: copy content={{ leftout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/named.log
+      when: inventory_hostname == "L-FW"    

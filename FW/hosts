@@ -1,0 +1,8 @@
+[test]
+L-FW ansible_host=10.10.10.1 ansible_ssh_user=root ansible_ssh_pass=toor
+R-FW ansible_host=20.20.20.100 ansible_ssh_user=root ansible_ssh_pass=toor
+[test:vars]
+ansible_ssh_common_args='-o ProxyCommand="ssh -W %h:%p -q 192.168.3.77"'
+
+[tests]
+guacd ansible_host=192.168.3.166 ansible_ssh_user=root ansible_ssh_pass=toor

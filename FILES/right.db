@@ -1,0 +1,14 @@
+$TTL 1D
+@	IN SOA	L-SRV.skill39.wsr. root.skill39.wsr. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+	NS	L-SRV.skill39.wsr.
+10.20	PTR	R-SRV
+1.20	PTR	R-FW
+1.10	PTR	R-FW
+2.10	PTR	R-RTR
+1.100	PTR	R-RTR
+100.100	PTR	R-RTR

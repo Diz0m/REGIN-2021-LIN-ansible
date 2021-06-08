@@ -1,0 +1,24 @@
+$TTL 1D
+@	IN SOA	L-SRV.skill39.wsr. root.skill39.wsr. (
+					0	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+	NS	L-SRV.skill39.wsr.
+L-SRV	A	172.16.20.10
+L-FW	A	172.16.50.1
+	A	172.16.55.1
+	A	172.16.20.1
+	A	10.10.10.1
+L-RTR-A	A	172.16.50.2
+	A	172.16.100.1
+L-RTR-B	A	172.16.55.2
+	A	172.16.200.1
+R-SRV	A	192.168.20.10
+R-FW	A	192.168.20.1
+	A	192.168.10.1
+	A	20.20.20.100
+R-RTR	A	192.168.10.2
+	A	192.168.100.1
+R-CLI	A	192.168.100.100

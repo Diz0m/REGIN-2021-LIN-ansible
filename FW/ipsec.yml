@@ -1,0 +1,50 @@
+---
+- name: Install ansible and all in L-FW
+  hosts: test
+
+  vars:
+    ansible_file_l: /opt/ansible/REGION/FILES/ipsecl
+    ansible_file_r: /opt/ansible/REGION/FILES/ipsecr
+    ansible_file: /opt/ansible/REGION/FILES/ipsec.secrets
+    ansible_play: /opt/ansible/REGION/TASKS/ipsec.yml
+  tasks:
+    - name: cp
+      copy: src={{ ansible_file_l }} dest=/etc/ansible/ipsec
+      when: inventory_hostname == "L-FW"
+
+    - name: cp
+      copy: src={{ ansible_file_r }} dest=/etc/ansible/ipsec
+      when: inventory_hostname == "R-FW"
+
+    - name: cp
+      copy: src={{ ansible_file }} dest=/etc/ansible/
+
+    - name: cp
+      copy: src={{ ansible_play }} dest=/etc/ansible/
+
+    - name: sed for L-FW
+      shell: sed -i "s/ all/ L-FW/g" /etc/ansible/ipsec.yml
+      when: inventory_hostname == "L-FW"
+
+    - name: sed for R-FW
+      shell: sed -i "s/ all/ R-FW/g" /etc/ansible/ipsec.yml
+      when: inventory_hostname == "R-FW"
+
+    - name: left ansible start
+      shell: ansible-playbook /etc/ansible/ipsec.yml
+      register: leftout
+      when: inventory_hostname == "L-FW"
+
+    - name: right ansible start
+      shell: ansible-playbook /etc/ansible/ipsec.yml
+      register: rightout
+      when: inventory_hostname == "R-FW"
+
+    - name: left log
+      local_action: copy content={{ leftout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/ipsec.log
+      when: inventory_hostname == "L-FW"    
+
+    - name: rigth log
+      local_action: copy content={{ rightout.stdout }} dest=/opt/ansible/REGION/LOGS/RIGHT/ipsec.log
+      when: inventory_hostname == "R-FW"
+

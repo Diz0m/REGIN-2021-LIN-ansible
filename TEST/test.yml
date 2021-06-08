@@ -1,0 +1,7 @@
+---
+- name: test
+  hosts: guacd
+  
+  tasks:
+  - name: mac
+    debug: msg="{{ hostvars[inventory_hostname].ansible_default_ipv4.macaddress }}"

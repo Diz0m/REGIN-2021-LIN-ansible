@@ -1,0 +1,10 @@
+172.16.20.10  L-SRV  L-SRV.skill39.wsr
+172.16.20.1  L-FW  L-FW.skill39.wsr
+172.16.50.2 L-RTR-A L-RTR-A.skill39.wsr
+172.16.55.2 L-RTR-B L-RTR-B.skill39.wsr
+172.16.200.61 L-CLI-B L-CLI-B.skill39.wsr
+20.20.20.10  ISP  ISP.skill39.wsr
+20.20.20.5  OUT-CLI  OUTL-CLI.skill39.wsr
+20.20.20.100  R-FW  R-FW.skill39.wsr
+192.168.10.2 R-RTR R-RTR.skill39.wsr
+192.168.100.100  R-CLI  R-CLI.skill39.wsr

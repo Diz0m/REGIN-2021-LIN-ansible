@@ -1,0 +1,40 @@
+---
+- name: named
+  hosts: R-SRV
+  vars:
+    zone_file: /etc/ansible/zoner
+
+  tasks:
+    - name: install named
+      dnf: name=bind state=installed
+
+    - name: cp
+      copy: src={{ zone_file }} dest=/opt/zone
+
+    - name: named sed
+      shell: sed -i "s/127.0.0.1/any/g" /etc/named.conf  
+
+    - name: named sed
+      shell: sed -i "s/localhost/any/g" /etc/named.conf
+
+    - name: named sed
+      shell: sed -i "32 i allow-recursion {any;};" /etc/named.conf
+
+    - name: named sed
+      shell: sed -i "33 i forwarders {10.10.10.10;};" /etc/named.conf
+
+    - name: named sed
+      shell: sed -i "s/enable yes/enable no/g" /etc/named.conf
+
+    - name: named sed
+      shell: sed -i "s/validation yes/validation no/g" /etc/named.conf
+
+    - name: cat zones
+      shell: cat /opt/zone >> /etc/named.conf    
+
+    - name: mkdir 777
+      shell: mkdir /opt/dns && chmod 777 /opt/dns
+
+    - name: start named
+      service: name=named state=restarted enabled=yes
+

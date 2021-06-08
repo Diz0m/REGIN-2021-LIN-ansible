@@ -1,0 +1,15 @@
+zone skill39.wsr {
+	type slave;
+	file "/opt/dns/forward.db";
+	masters { 172.16.20.10; };
+};
+zone 16.172.in-addr.arpa {
+	type slave;
+	file "/opt/dns/left.db";
+	masters { 172.16.20.10; };
+};
+zone 168.192.in-addr.arpa {
+	type slave;
+	file "/opt/dns/right.db";
+	masters { 172.16.20.10; };
+};

@@ -1,0 +1,26 @@
+
+PLAY [ping test] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [L-RTR-B]
+ok: [L-SRV]
+ok: [L-RTR-A]
+ok: [L-FW]
+ok: [L-CLI-A]
+ok: [L-CLI-B]
+
+TASK [ping] ********************************************************************
+ok: [L-SRV]
+ok: [L-RTR-B]
+ok: [L-RTR-A]
+ok: [L-FW]
+ok: [L-CLI-A]
+ok: [L-CLI-B]
+
+PLAY RECAP *********************************************************************
+L-CLI-A                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-CLI-B                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-FW                       : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-RTR-A                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-RTR-B                    : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+L-SRV                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

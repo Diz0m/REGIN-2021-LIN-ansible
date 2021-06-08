@@ -1,0 +1,18 @@
+zone "skill39.wsr"  {
+        type master;
+        file "/opt/dns/forward.db";
+	allow-transfer { any; };
+	allow-update { any; };
+};
+zone "16.172.in-addr.arpa" {
+        type master;
+        file "/opt/dns/left.db";
+	allow-transfer { any; };
+	allow-update { any; };
+};
+zone "168.192.in-addr.arpa" {
+        type master;
+        file "/opt/dns/right.db";
+	allow-transfer { any; };
+	allow-update { any; };
+};

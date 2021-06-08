@@ -1,0 +1,12 @@
+conn vpn
+	authby=secret
+	auto=start
+	type=tunnel	
+	ike=3des-sha1;dh14
+	esp=aes256-sha2
+	left=10.10.10.1
+	leftprotoport=gre
+	leftsubnet=0.0.0.0/0
+	right=20.20.20.100
+	rightprotoport=gre
+	rightsubnet=0.0.0.0/0

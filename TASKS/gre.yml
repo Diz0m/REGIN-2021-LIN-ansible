@@ -1,0 +1,15 @@
+---
+- name: ping test
+  hosts: all
+  vars:
+    file_path: /etc/ansible/gre
+
+  tasks:
+    - name: install network-scripts
+      dnf: name=network-scripts state=installed
+
+    - name: copy /etc/hosts
+      copy: src={{ file_path }} dest=/etc/sysconfig/network-scripts/ifcfg-tun1
+
+    - name: restart network
+      service: name=network state=restarted

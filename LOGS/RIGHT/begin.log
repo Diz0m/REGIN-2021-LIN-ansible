@@ -1,0 +1,26 @@
+
+PLAY [ping test] ***************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [R-SRV]
+ok: [R-RTR]
+ok: [R-CLI]
+ok: [R-FW]
+
+TASK [copy /etc/hosts] *********************************************************
+changed: [R-RTR]
+changed: [R-SRV]
+changed: [R-FW]
+changed: [R-CLI]
+
+TASK [nsswitch] ****************************************************************
+changed: [R-FW]
+changed: [R-SRV]
+changed: [R-RTR]
+changed: [R-CLI]
+
+PLAY RECAP *********************************************************************
+R-CLI                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+R-FW                       : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+R-RTR                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+R-SRV                      : ok=3    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   

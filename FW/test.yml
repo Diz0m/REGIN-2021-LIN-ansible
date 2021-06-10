@@ -3,7 +3,7 @@
   hosts: L-FW
 
   vars:
-    ansible_play: /opt/ansible/REGION/TEST/test_create_ca.yml
+    ansible_play: ../TEST/test_create_ca.yml
   tasks:
     - name: cp
       copy: src={{ ansible_play }} dest=/etc/ansible/
@@ -15,4 +15,4 @@
 
     - name: left log
       local_action: copy content={{ leftout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/begin.log
-      when: inventory_hostname == "L-FW"    
+      when: inventory_hostname == "L-FW"

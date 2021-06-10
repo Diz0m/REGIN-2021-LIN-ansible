@@ -1,0 +1,18 @@
+---
+- name: test create CA
+  hosts: L-FW
+
+  vars:
+    ansible_play: /opt/ansible/REGION/TEST/test_create_ca.yml
+  tasks:
+    - name: cp
+      copy: src={{ ansible_play }} dest=/etc/ansible/
+
+    - name: left ansible start
+      shell: ansible-playbook /etc/ansible/begin.yml
+      register: leftout
+      when: inventory_hostname == "L-FW"
+
+    - name: left log
+      local_action: copy content={{ leftout.stdout }} dest=/opt/ansible/REGION/LOGS/LEFT/begin.log
+      when: inventory_hostname == "L-FW"    

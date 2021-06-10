@@ -14,4 +14,6 @@ cd ./FW
 #ansible-playbook namedl.yml
 #ansible-playbook namedr.yml
 # dhcp-server
-ansible-playbook dhcp.yml
+#ansible-playbook dhcp.yml
+#test_create_ca
+ansible-playbook test.yml

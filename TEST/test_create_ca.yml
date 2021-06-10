@@ -1,0 +1,25 @@
+---
+- name: configure CA certificate
+  hosts: L-SRV
+  vars:
+    openssl_dir: /etc/ca
+    openssl_name: test
+
+  tasks:
+    - name: mkdir
+      shell: mkdir /etc/ca
+
+    - name: Generate private key
+      become: true
+      openssl_privatekey:
+      path: "/etc/pki/tls/private/{{ openssl_name }}.key"
+
+   - name: Generate CSR
+       become: true
+       openssl_csr:
+       path: "/etc/pki/tls/private/{{ openssl_name }}.csr"
+       privatekey_path: "/etc/pki/tls/private/{{ openssl_name }}.key"
+       country_name: FR
+       organization_name: "eNova Conseil"
+       common_name: "{{ openssl_name }}"
+       subject_alt_name: "DNS:{{ ansible_host }},DNS:{{ ansible_fqdn }}"

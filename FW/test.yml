@@ -6,7 +6,7 @@
     ansible_play: ./test_create_ca.yml
   tasks:
     - name: cp
-      copy: src=./test_create_ca dest=/etc/ansible/
+      copy: src=./test_create_ca.yml dest=/etc/ansible/
 
     - name: left ansible start
       shell: ansible-playbook /etc/ansible/test_create_ca.yml
